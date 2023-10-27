@@ -1,14 +1,17 @@
 import os
+import pytz
 import pandas as pd
 from github import Github, Issue
 from datetime import datetime, timedelta
 
 import load_data
 
+desired_timezone = pytz.timezone('Asia/Seoul')
+
 def update_weather_csv():
     station_info = pd.read_csv('./input/종관기상_관측지점.csv')
 
-    today = datetime.now()
+    today = datetime.now(desired_timezone)
     yesterday = today - timedelta(days=1)
     current_year = yesterday.year
 
@@ -30,7 +33,7 @@ def update_weather_csv():
 
 
 def update_price_csv(code, value):
-    today = datetime.now()
+    today = datetime.now(desired_timezone)
     current_year = today.year
 
     today = today.strftime("%Y%m%d")
@@ -49,7 +52,7 @@ def update_price_csv(code, value):
     return current_data
 
 def update_price_issue(current_data, value):
-    today = datetime.now()
+    today = datetime.now(desired_timezone)
 
     title = f'전국 소매 가격 정보 - {today.strftime("%Y%m%d")}'
     GITHUB_TOKEN = os.environ['MY_GITHUB_TOKEN']
