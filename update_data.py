@@ -45,7 +45,7 @@ def update_price_issue(current_data):
 
     title = f'{today.strftime("%Y%m%d")} - 서울 채소류 소매 가격 정보'
     GITHUB_TOKEN = os.environ['MY_GITHUB_TOKEN']
-    REPO_NAME = 'request_api'
+    REPO_NAME = 'Action_API'
     repo = Github(GITHUB_TOKEN).get_user().get_repo(REPO_NAME)
     body = current_data
 
