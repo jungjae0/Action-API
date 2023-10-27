@@ -53,7 +53,7 @@ def update_price_issue(current_data, value):
 
     title = f'전국 소매 가격 정보 - {today.strftime("%Y%m%d")}'
     GITHUB_TOKEN = os.environ['MY_GITHUB_TOKEN']
-    REPO_NAME = 'Action_API'
+    REPO_NAME = 'Action-API'
     repo = Github(GITHUB_TOKEN).get_user().get_repo(REPO_NAME)
     body = current_data
 
