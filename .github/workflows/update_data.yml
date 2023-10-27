@@ -34,7 +34,7 @@ jobs:
       run: |
         git config --global user.name "Jung Jaeyoung"
         git add ./output/price_data.csv
-        git commit -m "Update Price Data"
+        git commit -m "Update Price Data - $(date +'%Y-%m-%d')"
         git add ./output/weather/*.csv
-        git commit -m "Update Weather Data"
+        git commit -m "Update Weather Data - $(date +'%Y-%m-%d')"
         git push
