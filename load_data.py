@@ -6,7 +6,7 @@ import pandas as pd
 from datetime import datetime, timedelta
 from urllib.parse import quote_plus, urlencode
 
-def request_price_api(date):
+def request_price_api(date, code):
     url = 'http://www.kamis.or.kr/service/price/xml.do?action=dailyPriceByCategoryList'
     p_cert_key = os.environ['PRICE_API_KEY']
     headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 6.3; Win64; x64)'
@@ -16,9 +16,8 @@ def request_price_api(date):
     params = f'&{quote_plus("p_cert_key")}={p_cert_key}&' + urlencode({
         quote_plus("p_cert_id"): "3749",
         quote_plus("p_returntype"): "json",
-        quote_plus("p_product_cls_code"): "02",
-        quote_plus("p_item_category_code"): "200",
-        quote_plus("p_country_code"): "1101",
+        quote_plus("p_product_cls_code"): "01",
+        quote_plus("p_item_category_code"): f"{code}",
         quote_plus("p_regday"): date,
         quote_plus("p_convert_kg_yn"): 'N',
     })

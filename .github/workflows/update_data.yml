@@ -2,7 +2,7 @@ name: Update  Data
 
 on:
   schedule:
-    - cron: '31 10 * * *'
+    - cron: '0 12 * * *'
 
 jobs:
   build:
@@ -33,7 +33,7 @@ jobs:
     - name: Commit and push changes
       run: |
         git config --global user.name "Jung Jaeyoung"
-        git add ./output/price_data.csv
+        git add ./output/price/*.csv
         git commit -m "Update Price Data - $(date +'%Y-%m-%d')"
         git add ./output/weather/*.csv
         git commit -m "Update Weather Data - $(date +'%Y-%m-%d')"
