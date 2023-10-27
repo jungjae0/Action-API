@@ -17,13 +17,13 @@ def update_weather_csv():
     for idx, row in station_info.iterrows():
         stn_id = row['지점코드']
         filename = f'./output/weather/{stn_id}_{current_year}.csv'
-        update_weather = load_data.request_weather_api(stn_id, yesterday)
 
         if os.path.exists(filename):
+            update_weather = load_data.request_weather_api(stn_id, yesterday)
             exists_weather = pd.read_csv(filename)
             update_weather = pd.concat([exists_weather, update_weather], ignore_index=True)
             update_weather = update_weather.drop_duplicates()
-        update_weather.to_csv(filename, index=False)
+            update_weather.to_csv(filename, index=False)
         # else:
         #     update_weather = load_data.request_weather_api(stn_id, yesterday)
         #     update_weather.to_csv(filename, index=False)
