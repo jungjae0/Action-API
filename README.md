@@ -2,7 +2,6 @@
 
 ## Settings
 
------
 
 ### API Key 발급
 
@@ -47,7 +46,6 @@ GITHUB_TOKEN = os.environ['MY_GITHUB_TOKEN']
 
 ## Results
 
------
 
 **매일 새벽 1시 업데이트**
 
