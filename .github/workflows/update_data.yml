@@ -2,7 +2,7 @@ name: Update  Data
 
 on:
   schedule:
-    - cron: '38 12 * * *'
+    - cron: '0 13 * * *'
 
 jobs:
   build:
