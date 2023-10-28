@@ -65,7 +65,7 @@ def update_price_issue(current_data, value):
         issue.create_comment(comment)
 
     if REPO_NAME == repo.name:
-        if not body.empty:
+        if body is not None and not body.empty:
             table_md = '| ' + ' | '.join(body.columns) + ' |\n'
             table_md += '| ' + ' | '.join(['---'] * len(body.columns)) + ' |\n'
 
