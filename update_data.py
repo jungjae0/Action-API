@@ -88,10 +88,12 @@ def update_price_issue(current_data, value):
             repo.create_issue(title=title, body=body)
 
 def main():
-    code_dict = {100: '식량작물', 200: '채소류', 300: '특용작물', 400: '과일류', 500: '축산물', 600: '수산물'}
-    for code, value in code_dict.items():
-        current_data = update_price_csv(code, value)
-        update_price_issue(current_data, value)
+    current_datetime = datetime.now(desired_timezone).weekday()
+    if current_datetime != 6:
+        code_dict = {100: '식량작물', 200: '채소류', 300: '특용작물', 400: '과일류', 500: '축산물', 600: '수산물'}
+        for code, value in code_dict.items():
+            current_data = update_price_csv(code, value)
+            update_price_issue(current_data, value)
 
     update_weather_csv()
 
