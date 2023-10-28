@@ -40,16 +40,20 @@ def update_price_csv(code, value):
 
     filename = f"./output/price/{value}_{current_year}.csv"
 
-    current_data = load_data.request_price_api(today, code)
-    if os.path.exists(filename):
-        past_data = pd.read_csv(filename)
-        update_data = pd.concat([past_data, current_data], ignore_index=True)
-        update_data = update_data.drop_duplicates()
-        update_data.to_csv(filename, index=False)
-    else:
-        current_data.to_csv(filename, index=False)
+    try:
+        current_data = load_data.request_price_api(today, code)
+        if os.path.exists(filename):
+            past_data = pd.read_csv(filename)
+            update_data = pd.concat([past_data, current_data], ignore_index=True)
+            update_data = update_data.drop_duplicates()
+            update_data.to_csv(filename, index=False)
+        else:
+            current_data.to_csv(filename, index=False)
 
-    return current_data
+        return current_data
+    
+    except:
+        pass
 
 def update_price_issue(current_data, value):
     today = datetime.now(desired_timezone)

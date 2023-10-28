@@ -62,10 +62,8 @@ def request_weather_api(stn_Ids, date):
         result = requests.get(url + params, headers=headers)
 
     try:
-
         js = json.loads(result.content)
         weather = pd.DataFrame(js['response']['body']['items']['item'])
-
         return weather
 
     except:
