@@ -2,7 +2,7 @@ name: Update  Data
 
 on:
   schedule:
-    - cron: '17 19 * * *'
+    - cron: '34 19 * * *'
 
 jobs:
   build:
@@ -37,5 +37,5 @@ jobs:
     
         git add ./output/price/*.csv
         git add ./output/weather/*.csv
-        git commit -m "Update Data - $(date +'%Y-%m-%d' --date='TZ='Asia/Seoul'')"
+        git commit -m "Update Data - $(TZ='Asia/Seoul' date +'%Y-%m-%d')"
         git push  
