@@ -3,3 +3,4 @@ requests
 PyGithub
 seaborn
 pytz
+chardet

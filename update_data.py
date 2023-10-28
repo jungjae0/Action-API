@@ -80,7 +80,7 @@ def update_price_issue(current_data, value):
 
             body = f"### {value}\n" + table_md
         else:
-            body = '데이터가 없습니다.'
+            body = f"### {value}\n" + '데이터가 없습니다.'
 
         existing_issue = None
         for issue in repo.get_issues():

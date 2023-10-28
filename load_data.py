@@ -1,6 +1,7 @@
 import os
 import json
 import time
+import chardet
 import requests
 import pandas as pd
 from datetime import datetime, timedelta
