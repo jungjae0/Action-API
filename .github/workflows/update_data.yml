@@ -2,7 +2,7 @@ name: Update  Data
 
 on:
   schedule:
-    - cron: '34 17 * * *'
+    - cron: '51 17 * * *'
 
 jobs:
   build:
@@ -35,10 +35,8 @@ jobs:
         git config user.email "jyihaan4@naver.com"
         git config user.name "Jung Jaeyoung"
     
-        if [[ -n $(git status --porcelain ./output/price) || -n $(git status --porcelain ./output/weather) ]]; then
-          TZ='Asia/Seoul' date +'%Y-%m-%d' > date.txt
-          git add ./output/price/*.csv
-          git add ./output/weather/*.csv
-          git commit -m "Update Data - $(cat date.txt)"
-          git push
-        fi
+        TZ='Asia/Seoul' date +'%Y-%m-%d' > date.txt
+        git add ./output/price/*.csv
+        git add ./output/weather/*.csv
+        git commit -m "Update Data - $(cat date.txt)"
+        git push

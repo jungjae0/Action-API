@@ -33,7 +33,9 @@ def update_weather_csv():
 
 
 def update_price_csv(code, value):
+
     today = datetime.now(desired_timezone)
+    today_weekday = today.weekday()
     current_year = today.year
 
     today = today.strftime("%Y%m%d")
@@ -42,7 +44,7 @@ def update_price_csv(code, value):
 
     try:
         current_data = load_data.request_price_api(today, code)
-        if os.path.exists(filename):
+        if os.path.exists(filename) and today_weekday != 6:
             past_data = pd.read_csv(filename)
             update_data = pd.concat([past_data, current_data], ignore_index=True)
             update_data = update_data.drop_duplicates()
@@ -51,7 +53,7 @@ def update_price_csv(code, value):
             current_data.to_csv(filename, index=False)
 
         return current_data
-    
+
     except:
         pass
 
@@ -92,12 +94,11 @@ def update_price_issue(current_data, value):
             repo.create_issue(title=title, body=body)
 
 def main():
-    current_datetime = datetime.now(desired_timezone).weekday()
-    if current_datetime != 6:
-        code_dict = {100: '식량작물', 200: '채소류', 300: '특용작물', 400: '과일류', 500: '축산물', 600: '수산물'}
-        for code, value in code_dict.items():
-            current_data = update_price_csv(code, value)
-            update_price_issue(current_data, value)
+
+    code_dict = {100: '식량작물', 200: '채소류', 300: '특용작물', 400: '과일류', 500: '축산물', 600: '수산물'}
+    for code, value in code_dict.items():
+        current_data = update_price_csv(code, value)
+        update_price_issue(current_data, value)
 
     update_weather_csv()
 
