@@ -2,7 +2,7 @@ name: Update  Data
 
 on:
   schedule:
-    - cron: '45 16 * * *'
+    - cron: '58 16 * * *'
 
 jobs:
   build:
@@ -32,6 +32,7 @@ jobs:
 
     - name: Commit and push changes
       run: |
+        git config --global user.email "you@example.com"
         git config --global user.name "Jung Jaeyoung"
         git add ./output/price/*.csv
         git commit -m "Update Price Data - $(TZ='Asia/Seoul' date +'%Y-%m-%d')"
