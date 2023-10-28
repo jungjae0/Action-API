@@ -32,7 +32,7 @@ jobs:
 
     - name: Commit and push changes
       run: |
-        git config --global user.email "you@example.com"
+        git config --global user.email "jyihaan4@naver.com"
         git config --global user.name "Jung Jaeyoung"
         git add ./output/price/*.csv
         git commit -m "Update Price Data - $(TZ='Asia/Seoul' date +'%Y-%m-%d')"
