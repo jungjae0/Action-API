@@ -12,17 +12,22 @@ def update_weather_csv():
     station_info = pd.read_csv('./input/종관기상_관측지점.csv')
 
     today = datetime.now(desired_timezone)
-    yesterday = today - timedelta(days=1)
-    current_year = yesterday.year
+    sdate = today - timedelta(days=3)
+    edate = today - timedelta(days=1)
 
-    yesterday = yesterday.strftime("%Y%m%d")
+    current_year = edate.year
+
+
+    sdate = sdate.strftime("%Y%m%d")
+    edate = edate.strftime("%Y%m%d")
+
 
     for idx, row in station_info.iterrows():
         stn_id = row['지점코드']
         filename = f'./output/weather/{stn_id}_{current_year}.csv'
 
         if os.path.exists(filename):
-            update_weather = load_data.request_weather_api(stn_id, yesterday)
+            update_weather = load_data.request_weather_api(stn_id, sdate, edate)
             exists_weather = pd.read_csv(filename)
             update_weather = pd.concat([exists_weather, update_weather], ignore_index=True)
             update_weather = update_weather.drop_duplicates()
@@ -95,10 +100,10 @@ def update_price_issue(current_data, value):
 
 def main():
 
-    # code_dict = {100: '식량작물', 200: '채소류', 300: '특용작물', 400: '과일류', 500: '축산물', 600: '수산물'}
-    # for code, value in code_dict.items():
-    #     current_data = update_price_csv(code, value)
-    #     update_price_issue(current_data, value)
+    code_dict = {100: '식량작물', 200: '채소류', 300: '특용작물', 400: '과일류', 500: '축산물', 600: '수산물'}
+    for code, value in code_dict.items():
+        current_data = update_price_csv(code, value)
+        update_price_issue(current_data, value)
 
     update_weather_csv()
 

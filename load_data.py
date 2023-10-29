@@ -39,7 +39,7 @@ def request_price_api(date, code):
         pass
 
 
-def request_weather_api(stn_Ids, date):
+def request_weather_api(stn_Ids, sdate, edate):
     url = 'http://apis.data.go.kr/1360000/AsosDalyInfoService/getWthrDataList'
     servicekey = os.environ['WEATHER_API_KEY']
     headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 6.3; Win64; x64)'
@@ -52,8 +52,8 @@ def request_weather_api(stn_Ids, date):
         quote_plus("dataType"): "JSON",  # 응답자료형식 : XML, JSON
         quote_plus("dataCd"): "ASOS",
         quote_plus("dateCd"): "DAY",
-        quote_plus("startDt"): date,
-        quote_plus("endDt"): date,
+        quote_plus("startDt"): sdate,
+        quote_plus("endDt"): edate,
         quote_plus("stnIds"): f"{stn_Ids}"
     })
     try:
