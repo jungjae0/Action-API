@@ -2,7 +2,6 @@
 
 ## Settings
 
-
 ### API Key 발급
 
 | 구분                    | 제공                 | link                                                               |
@@ -49,10 +48,11 @@ GITHUB_TOKEN = os.environ['MY_GITHUB_TOKEN']
 
 **매일 새벽 1시 업데이트**
 
-| 구분      | 일별 기상 데이터 streamlit    | 일별 부류별 농산물 도.소매 가격 정보                                                                                 |
-|---------|------------------------------|-------------------------------------------------------------------------------------------------------|
-| link    |   **[link](https://actionapi.streamlit.app/)**           | **[link](https://github.com/jungjae0/Action-API/issues)**                                                 |
-| 결과      |  ![streamlit](https://github.com/jungjae0/Action-API/assets/93760723/80565b6b-dfaf-4005-a31c-be0d67ad8eb5) | ![issue](https://github.com/jungjae0/Action-API/assets/93760723/6f6e6c64-7c74-456a-8cd1-1a4b845aeab2) |
+| 구분   | 일별 기상 데이터 streamlit                                                                                       | 일별 부류별 농산물 도.소매 가격 정보                                                                                 |
+|------|-----------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------|
+| link | **[link](https://actionapi.streamlit.app/)**                                                              | **[link](https://github.com/jungjae0/Action-API/issues)**                                                 |
+| data | **[link](./output/weather)**                                                                              | **[link](./output/price)**                                                 |
+| 결과   | ![streamlit](https://github.com/jungjae0/Action-API/assets/93760723/80565b6b-dfaf-4005-a31c-be0d67ad8eb5) | ![issue](https://github.com/jungjae0/Action-API/assets/93760723/6f6e6c64-7c74-456a-8cd1-1a4b845aeab2) |
 
 
 
@@ -60,6 +60,11 @@ GITHUB_TOKEN = os.environ['MY_GITHUB_TOKEN']
 
 1. ```load_data.py``` > request API
 2. ```update_data.py``` > update csv/issue
+
+    - ```update_issue.py``` > update issue
+    - ```update_price.py``` > update price
+    - ```update_weather.py``` > update weather
+
 3. ```.github/workflows/update_data.yml``` > GitHub Action workflow
 4. ```app.py``` > temperature monitoring streamlit app
 5. ```output``` > update data
