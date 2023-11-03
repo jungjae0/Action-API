@@ -27,6 +27,7 @@ jobs:
       run: python update_data.py
       env:
         WEATHER_API_KEY: ${{ secrets.WEATHER_API_KEY }}
+        MY_GITHUB_TOKEN: ${{ secrets.MY_GITHUB_TOKEN }}
 
     - name: Commit and push changes
       run: |
