@@ -26,6 +26,7 @@ jobs:
     - name: Run Python Script
       run: python update_price.py
       env:
+        MY_GITHUB_TOKEN: ${{ secrets.MY_GITHUB_TOKEN }}
         PRICE_API_KEY: ${{ secrets.PRICE_API_KEY }}
 
     - name: Commit and push changes
