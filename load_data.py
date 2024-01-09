@@ -1,7 +1,6 @@
 import os
 import json
 import time
-import chardet
 import requests
 import pandas as pd
 from datetime import datetime, timedelta
@@ -39,9 +38,11 @@ def request_price_api(date, code):
         pass
 
 
-def request_weather_api(stn_Ids, sdate, edate):
+def request_weather_api(stn_Ids, s_d, e_d):
     url = 'http://apis.data.go.kr/1360000/AsosDalyInfoService/getWthrDataList'
-    servicekey = os.environ['WEATHER_API_KEY']
+    servicekey = 'HOhrXN4295f2VXKpOJc4gvpLkBPC/i97uWk8PfrUIONlI7vRB9ij088/F5RvIjZSz/PUFjJ4zkMjuBkbtMHqUg=='
+
+    # servicekey = os.environ['WEATHER_API_KEY']
     headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 6.3; Win64; x64)'
                              'AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.132'
                              'Safari/537.36'}
@@ -52,20 +53,29 @@ def request_weather_api(stn_Ids, sdate, edate):
         quote_plus("dataType"): "JSON",  # 응답자료형식 : XML, JSON
         quote_plus("dataCd"): "ASOS",
         quote_plus("dateCd"): "DAY",
-        quote_plus("startDt"): sdate,
-        quote_plus("endDt"): edate,
+        quote_plus("startDt"): s_d,
+        quote_plus("endDt"): e_d,
         quote_plus("stnIds"): f"{stn_Ids}"
     })
     try:
         result = requests.get(url + params, headers=headers)
     except:
-        time.sleep(2)
+        time.sleep(3)
         result = requests.get(url + params, headers=headers)
 
     try:
         js = json.loads(result.content)
-        weather = pd.DataFrame(js['response']['body']['items']['item'])
-        return weather
+        df = pd.DataFrame(js['response']['body']['items']['item'])
+        df['tm'] = pd.to_datetime(df['tm'])
+        df['year'] = df['tm'].dt.year
+        df['month'] = df['tm'].dt.month
+        df['day'] = df['tm'].dt.day
 
+        cols = ['year', 'month', 'day', 'avgTa', 'minTa', 'maxTa', 'sumRn', 'sumRn', 'ddMefs']
+
+        df = df[cols]
+        df.columns = ['year', 'month', 'day', 'tavg', 'tmin', 'tmax', 'rain', 'sunshine', 'snow']
+
+        return df
     except:
         pass
