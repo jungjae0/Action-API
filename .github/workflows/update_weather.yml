@@ -2,7 +2,7 @@ name: Update Weather Data
 
 on:
   schedule:
-    - cron: '16 05 * * *'
+    - cron: '10 06 * * *'
 
 jobs:
   build:
@@ -24,7 +24,7 @@ jobs:
         if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
 
     - name: Run Python Script
-      run: python update_data.py
+      run: python update_weather.py
       env:
         WEATHER_API_KEY: ${{ secrets.WEATHER_API_KEY }}
         MY_GITHUB_TOKEN: ${{ secrets.MY_GITHUB_TOKEN }}
