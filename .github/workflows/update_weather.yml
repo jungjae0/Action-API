@@ -2,7 +2,7 @@ name: Update Weather Data
 
 on:
   schedule:
-    - cron: '00 05 * * *'
+    - cron: '16 05 * * *'
 
 jobs:
   build:
@@ -34,7 +34,7 @@ jobs:
         git config user.email "jyihaan4@naver.com"
         git config user.name "Jung Jaeyoung"
     
-        git add ./data_weather/*
+        git add ./data_weather/*/*.csv
         git clean -xdf
         git commit -m "Update Data | $(TZ='Asia/Seoul' date +'%Y-%m-%d')"
         git push  
