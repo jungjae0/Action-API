@@ -1,5 +1,4 @@
 import os
-import tqdm
 import time
 import pytz
 import pandas as pd
@@ -21,7 +20,7 @@ def update_weather():
     y = d[0:4]
     m = d[4:6]
 
-    for name, code in tqdm.tqdm(station_dct.items()):
+    for name, code in station_dct.items():
         file_dir = f'./data_weather/{name}/{y}'
         if not os.path.exists(file_dir):
             os.makedirs(file_dir)
