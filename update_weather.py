@@ -31,7 +31,7 @@ def update_weather(d):
         while check_flag == 0 and max_retries > 0:
             d_df = load_data.request_weather_api(code, d, d)
 
-            if not d_df.empty:
+            try:
                 if os.path.exists(file_path):
                     e_df = pd.read_csv(file_path)
                     u_df = pd.concat([e_df, d_df], ignore_index=True)
@@ -41,7 +41,7 @@ def update_weather(d):
                     d_df.to_csv(file_path, index=False)
 
                 check_flag = 1
-            else:
+            except:
                 max_retries -= 1
                 time.sleep(1)
 
