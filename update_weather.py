@@ -26,9 +26,9 @@ def update_weather(d):
         file_path = os.path.join(file_dir, f'{m}.csv')
 
         check_flag = 0
-        max_retries = 1
+        max_retries = 10
 
-        while check_flag == 0 and max_retries != 0:
+        while check_flag == 0 and max_retries > 0:
             d_df = load_data.request_weather_api(code, d, d)
 
             if not d_df.empty:
@@ -42,7 +42,7 @@ def update_weather(d):
 
                 check_flag = 1
             else:
-                max_retries = 0
+                max_retries -= 1
                 time.sleep(1)
 
 def save_retry(re_date):
