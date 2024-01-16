@@ -36,6 +36,7 @@ def update_weather(d):
                     e_df = pd.read_csv(file_path)
                     u_df = pd.concat([e_df, d_df], ignore_index=True)
                     u_df = u_df.drop_duplicates(['day'])
+                    u_df = u_df.sort_values(by='day')
                     u_df.to_csv(file_path, index=False)
                 else:
                     d_df.to_csv(file_path, index=False)
@@ -55,7 +56,10 @@ def main():
     update_weather(d)
 
     # re_date = '' # %Y%m%d
-    # save_retry(re_date)
+    # re_list = ['20240110', '20240111', '20240112', '20240113', '20240114']
+    # import tqdm
+    # for re_date in tqdm.tqdm(re_list):
+    #     save_retry(re_date)
 
 if __name__ == '__main__':
     main()
