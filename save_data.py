@@ -45,7 +45,7 @@ def split_data(stnNm):
             df = pd.read_csv(os.path.join(stn_dir, f'{year}.csv'))
             for month in list(df['month'].unique()):
                 month_df = df[df['month'] == month]
-                month_df.to_csv(os.path.join(save_stn_dir, f'{month:2d}.csv'), index=False)
+                month_df.to_csv(os.path.join(save_stn_dir, f'{month:02d}.csv'), index=False)
         except:
             continue
 def main():
