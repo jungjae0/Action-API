@@ -71,7 +71,7 @@ def request_weather_api(stn_Ids, s_d, e_d):
         df['month'] = df['tm'].dt.month
         df['day'] = df['tm'].dt.day
 
-        cols = ['year', 'month', 'day', 'avgTa', 'minTa', 'maxTa', 'sumRn', 'sumRn', 'ddMefs']
+        cols = ['year', 'month', 'day', 'avgTa', 'minTa', 'maxTa', 'sumRn', 'sumSsHr', 'ddMefs']
 
         df = df[cols]
         df.columns = ['year', 'month', 'day', 'tavg', 'tmin', 'tmax', 'rain', 'sunshine', 'snow']
@@ -79,3 +79,4 @@ def request_weather_api(stn_Ids, s_d, e_d):
         return df
     except:
         pass
+
