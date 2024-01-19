@@ -38,7 +38,7 @@ def split_data(stnNm):
     for year in tqdm.tqdm(range(1973, 2025), desc=f'{stnNm}'):
         stn_dir = os.path.join(output_dir, f'{stnNm}')
 
-        save_stn_dir = os.path.join('./data_weather', f'{stnNm}', f'{year}')
+        save_stn_dir = os.path.join('weather', f'{stnNm}', f'{year}')
         if not os.path.exists(save_stn_dir):
             os.makedirs(save_stn_dir)
         try:
@@ -48,7 +48,25 @@ def split_data(stnNm):
                 month_df.to_csv(os.path.join(save_stn_dir, f'{month:02d}.csv'), index=False)
         except:
             continue
+
+def del_empty():
+    root_dir = 'weather'
+    lst = []
+    for region in os.listdir(root_dir):
+        region_path = os.path.join(root_dir, region)
+
+        for year in os.listdir(region_path):
+            year_path = os.path.join(region_path, year)
+            print(year_path)
+
+            files_in_year = os.listdir(year_path)
+
+            if len(files_in_year) == 0:
+                lst.append(year_path)
+                # os.rmdir(year_path)
+    print(lst)
 def main():
+    # del_empty()
     station_info = pd.read_csv('./input/관측지점코드.csv')
     station_dct = dict(zip(station_info['지점명'], station_info['지점']))
     for stnNm, stnId in station_dct.items():

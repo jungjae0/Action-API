@@ -19,7 +19,7 @@ def update_weather(d):
     m = d[4:6]
 
     for name, code in station_dct.items():
-        file_dir = f'./data_weather/{name}/{y}'
+        file_dir = f'./weather/{name}/{y}'
         if not os.path.exists(file_dir):
             os.makedirs(file_dir)
 
@@ -55,8 +55,8 @@ def main():
     d = (today - timedelta(days=1)).strftime('%Y%m%d')
     update_weather(d)
 
-    # re_date = '' # %Y%m%d
-    # re_list = ['20240110', '20240111', '20240112', '20240113', '20240114']
+    re_date = '' # %Y%m%d
+    # re_list = ['20240117', '20240118']
     # import tqdm
     # for re_date in tqdm.tqdm(re_list):
     #     save_retry(re_date)
