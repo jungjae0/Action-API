@@ -2,7 +2,7 @@ name: Update Weather Data
 
 on:
   schedule:
-    - cron: '50 13 * * *'
+    - cron: '01 14 * * *'
 
 jobs:
   build:
@@ -34,8 +34,12 @@ jobs:
         git config user.email "jyihaan4@naver.com"
         git config user.name "Jung Jaeyoung"
 
+        git rm -r --cached __pycache__
+        git commit -m "Remove __pycache__ from tracking"
+        git push origin main
+
         
         git add ./weather/*/*.csv
         git clean -xdf
         git commit -m "Update Data | $(TZ='Asia/Seoul' date +'%Y-%m-%d')"
-        git push  
+        git push origin main
