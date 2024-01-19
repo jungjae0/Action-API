@@ -35,7 +35,7 @@ jobs:
         git config user.name "Jung Jaeyoung"
 
         
-        git add ./data_weather/*/*.csv
+        git add ./weather/*/*.csv
         git clean -xdf
         git commit -m "Update Data | $(TZ='Asia/Seoul' date +'%Y-%m-%d')"
         git push  
